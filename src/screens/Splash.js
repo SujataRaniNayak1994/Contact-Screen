@@ -20,13 +20,12 @@ const Splash = () => {
           your logistic needs with our user-friendly app
         </Text>
       </View>
-      <View>
-        <Button
-        //   onPress={onPressLearnMore}
-          title="Learn More"
-          color="#841584"
-          accessibilityLabel="Learn more about this purple button"
-        />
+      <View style={styles.btnview1}>
+        <View style={styles.btn1}>
+          <Text>Skip</Text>
+          <Text>---</Text>
+          <Text>Next</Text>
+        </View>
       </View>
       <StatusBar style="auto" />
     </View>
@@ -61,5 +60,15 @@ const styles = StyleSheet.create({
     color: "#f0f0f0",
     textAlign: "center",
     // padding:20,
+  },
+  btnview1: {
+    display: "flex",
+    flex: 0.8,
+    justifyContent: "flex-end",
+  },
+  btn1: {
+    display: "flex",
+    backgroundColor:'#fff',
+   flexDirection: "row",
   },
 });
