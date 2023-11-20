@@ -1,38 +1,39 @@
 import React, { useState } from "react";
-import { Text, StyleSheet, View, TextInput, Button } from "react-native";
+import { Text, StyleSheet, View, TextInput, TouchableOpacity } from "react-native";
 
 const Registration = () => {
   return (
     <View style={styles.container}>
-      <Text style={styles.text1}>Register New User</Text>
-      <View style={styles.view1}>
-        <TextInput placeholder="Name" style={styles.input} autoCapitalize="none" autoCorrect={false} />
-        <TextInput style={styles.input} placeholder="Email" autoCapitalize="none" autoCorrect={false} />
-        <TextInput style={styles.input} placeholder="Your mobile Number" autoCapitalize="none" autoCorrect={false}  />
-        <TextInput style={styles.input} placeholder="Date Of Birth"  />
-        <Text style={styles.check}>
-          By signing up, you agree to the{" "} 
-          <Text style={styles.termsHighlight}>Terms of Service</Text> and{" "}
-          <Text style={styles.termsHighlight}>Privacy policy.</Text>
-        </Text>
-        <TextInput style={styles.signup} placeholder="Sign Up" />
-        <View style={styles.orContainer}>
-          <View style={styles.horizontalLine} />
-          <Text style={styles.or}>or</Text>
-          <View style={styles.horizontalLine} />
-        </View>
-        <View>
+    <Text style={styles.text1}>Register New User</Text>
+    <View style={styles.view1}>
+      <TextInput placeholder="Name" style={styles.input} autoCapitalize="none" autoCorrect={false} />
+      <TextInput style={styles.input} placeholder="Email" autoCapitalize="none" autoCorrect={false} />
+      <TextInput style={styles.input} placeholder="Your mobile Number" autoCapitalize="none" autoCorrect={false}  />
+      <TextInput style={styles.input} placeholder="Date Of Birth"  />
+      <Text style={styles.check}>
+        By signing up, you agree to the{" "} 
+        <Text style={styles.termsHighlight}>Terms of Service</Text> and{" "}
+        <Text style={styles.termsHighlight}>Privacy policy.</Text>
+      </Text>
+      <TouchableOpacity style={styles.signupButton} onPress={() => console.log("Sign Up pressed")}>
+        <Text style={styles.signupText}>Sign Up</Text>
+      </TouchableOpacity>
+      <View style={styles.orContainer}>
+        <View style={styles.horizontalLine} />
+        <Text style={styles.or}>or</Text>
+        <View style={styles.horizontalLine} />
+      </View>
+      <View>
         <TextInput style={styles.google} placeholder="Google" />
-        </View>
-        
-        <View >
-          <Text style={styles.alacc}>
-            Already have an account?{" "}
-            <Text style={styles.termsHighlight}>Sign in</Text>
-          </Text>
-        </View>
+      </View>
+      <View>
+        <Text style={styles.endText}>
+          Already have an account?{" "}
+          <Text style={styles.termsHighlight}>Sign in</Text>
+        </Text>
       </View>
     </View>
+  </View>
   );
 };
 
@@ -71,16 +72,18 @@ const styles = StyleSheet.create({
     color: "grey",
     
   },
-  signup: {
+  signupButton: {
     height: 60,
     margin: 12,
-    borderWidth: 1,
-    padding: 10,
     borderRadius: 40,
-    color: "#fff",
     backgroundColor: "red",
-    textAlign: "center",
-    borderColor: "red",
+    justifyContent: "center",
+    alignItems: "center",
+  },
+  signupText: {
+    color: "#fff",
+    fontSize: 18,
+    fontWeight: "bold",
   },
   google: {
     height: 60,
@@ -113,7 +116,7 @@ const styles = StyleSheet.create({
     height: 1,
     backgroundColor: "grey",
   },
-  alacc: {
+  endText: {
     fontSize: 15,
     fontWeight: "bold",
     color: "grey",

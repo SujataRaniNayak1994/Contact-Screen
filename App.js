@@ -4,6 +4,7 @@ import Splash from './src/screens/Splash';
 import Registration from './src/authentication/Registration';
 import Login from './src/authentication/Login';
 import Welcome from './src/authentication/Welcome';
+import WhereTo from './src/screens/WhereTo';
 
 export default function App() {
   return (
@@ -11,7 +12,8 @@ export default function App() {
       {/* <Splash/> */}
       {/* <Registration/> */}
       {/* <Login/> */}
-      <Welcome/>
+      {/* <Welcome/> */}
+      <WhereTo/>
     </View>
   );
 }
