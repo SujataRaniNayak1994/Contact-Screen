@@ -4,31 +4,28 @@ import { Text, StyleSheet, View, TextInput, Button } from "react-native";
 const Registration = () => {
   return (
     <View style={styles.container}>
-      <Text style={styles.text1}>Register New User</Text>
+      <Text style={styles.text1}>Login With OTP</Text>
       <View style={styles.view1}>
-        <TextInput placeholder="Name" style={styles.input} autoCapitalize="none" autoCorrect={false} />
-        <TextInput style={styles.input} placeholder="Email" autoCapitalize="none" autoCorrect={false} />
-        <TextInput style={styles.input} placeholder="Your mobile Number" autoCapitalize="none" autoCorrect={false}  />
-        <TextInput style={styles.input} placeholder="Date Of Birth"  />
-        <Text style={styles.check}>
-          By signing up, you agree to the{" "} 
-          <Text style={styles.termsHighlight}>Terms of Service</Text> and{" "}
-          <Text style={styles.termsHighlight}>Privacy policy.</Text>
-        </Text>
-        <TextInput style={styles.signup} placeholder="Sign Up" />
+        <TextInput
+          style={styles.input}
+          placeholder="Enter your Phone Number"
+          autoCapitalize="none"
+          autoCorrect={false}
+        />
+        <TextInput style={styles.signup} placeholder="Log In" />
         <View style={styles.orContainer}>
           <View style={styles.horizontalLine} />
           <Text style={styles.or}>or</Text>
           <View style={styles.horizontalLine} />
         </View>
         <View>
-        <TextInput style={styles.google} placeholder="Google" />
+          <TextInput style={styles.google} placeholder="Google" />
         </View>
-        
-        <View >
-          <Text style={styles.alacc}>
-            Already have an account?{" "}
-            <Text style={styles.termsHighlight}>Sign in</Text>
+
+        <View>
+          <Text style={styles.endDesc}>
+            Don't have an account?{" "}
+            <Text style={styles.termsHighlight}>Sign Up</Text>
           </Text>
         </View>
       </View>
@@ -63,22 +60,21 @@ const styles = StyleSheet.create({
   },
   input: {
     height: 60,
-    margin: 8,
+    margin: 12,
     borderWidth: 1,
     padding: 12,
     borderRadius: 40,
     borderColor: "grey",
     color: "grey",
-    
   },
   signup: {
     height: 60,
     margin: 12,
     borderWidth: 1,
-    padding: 10,
+    padding: 12,
     borderRadius: 40,
-    color: "#fff",
     backgroundColor: "red",
+    color:'#fff',
     textAlign: "center",
     borderColor: "red",
   },
@@ -90,7 +86,7 @@ const styles = StyleSheet.create({
     padding: 10,
     borderRadius: 40,
     color: "white",
-    fontWeight:'bold',
+    fontWeight: "bold",
     textAlign: "center",
     alignSelf: "center",
     borderColor: "grey",
@@ -113,8 +109,9 @@ const styles = StyleSheet.create({
     height: 1,
     backgroundColor: "grey",
   },
-  alacc: {
+  endDesc: {
     fontSize: 15,
+    margin:18,
     fontWeight: "bold",
     color: "grey",
     alignSelf: "center",
