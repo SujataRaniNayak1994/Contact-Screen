@@ -1,7 +1,14 @@
 import React, { useState } from "react";
-import { Text, StyleSheet, View, TextInput, Button } from "react-native";
+import {
+  Text,
+  StyleSheet,
+  View,
+  TextInput,
+  Button,
+  TouchableOpacity,
+} from "react-native";
 
-const Registration = () => {
+const Login = ({ navigation }) => {
   return (
     <View style={styles.container}>
       <Text style={styles.text1}>Login With OTP</Text>
@@ -12,7 +19,12 @@ const Registration = () => {
           autoCapitalize="none"
           autoCorrect={false}
         />
-        <TextInput style={styles.signup} placeholder="Log In" />
+        <TouchableOpacity
+          style={styles.button}
+          onPress={() => navigation.navigate("Home")}
+        >
+          <Text style={styles.buttonText}>LogIn</Text>
+        </TouchableOpacity>
         <View style={styles.orContainer}>
           <View style={styles.horizontalLine} />
           <Text style={styles.or}>or</Text>
@@ -33,14 +45,14 @@ const Registration = () => {
   );
 };
 
-export default Registration;
+export default Login;
 
 const styles = StyleSheet.create({
   container: {
     height: "100%",
     paddingHorizontal: 5,
     backgroundColor: "#fff",
-    paddingTop: 100,
+    paddingTop: 20,
   },
   check: {
     paddingHorizontal: 20,
@@ -67,16 +79,20 @@ const styles = StyleSheet.create({
     borderColor: "grey",
     color: "grey",
   },
-  signup: {
-    height: 60,
-    margin: 12,
+  button: {
+    height: 55,
+    margin: 8,
     borderWidth: 1,
     padding: 12,
     borderRadius: 40,
-    backgroundColor: "red",
-    color:'#fff',
-    textAlign: "center",
     borderColor: "red",
+    backgroundColor: "red",
+    alignItems: "center",
+    justifyContent: "center",
+  },
+  buttonText: {
+    color: "#fff", // Default text color
+    fontWeight: "400",
   },
   google: {
     height: 60,
@@ -111,7 +127,7 @@ const styles = StyleSheet.create({
   },
   endDesc: {
     fontSize: 15,
-    margin:18,
+    margin: 18,
     fontWeight: "bold",
     color: "grey",
     alignSelf: "center",

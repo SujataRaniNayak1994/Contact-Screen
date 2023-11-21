@@ -1,7 +1,7 @@
 import { StyleSheet, Text, View, TouchableOpacity, Image } from "react-native";
 import React, { useState } from "react";
 
-const Welcome = () => {
+const Welcome = ({ navigation }) => {
   const [activeButton, setActiveButton] = useState(null);
 
   const handleButtonPress = (buttonName) => {
@@ -30,18 +30,19 @@ const Welcome = () => {
             styles.button,
             activeButton === "Register" && styles.active,
           ]}
-          onPress={() => handleButtonPress("Register")}
+          onPress={() => navigation.navigate('Registration')}
+          // onPress={() => handleButtonPress("Registration")}
         >
           <Text style={[styles.buttonText, activeButton === "Register" && styles.textWhite]}>Register</Text>
         </TouchableOpacity>
         <TouchableOpacity
           style={[
             styles.button,
-            activeButton === "Signup" && styles.active,
+            activeButton === "LogIn" && styles.active,
           ]}
-          onPress={() => handleButtonPress("Signup")}
+          onPress={() => navigation.navigate('Login')}
         >
-          <Text style={[styles.buttonText, activeButton === "Signup" && styles.textWhite]}>Sign Up</Text>
+          <Text style={[styles.buttonText, activeButton === "LogIn" && styles.textWhite]}>Log In</Text>
         </TouchableOpacity>
       </View>
     </View>
@@ -53,9 +54,10 @@ export default Welcome;
 const styles = StyleSheet.create({
   container: {
     flex: 1,
+    padding:5,
   },
   button: {
-    height: 60,
+    height: 55,
     margin: 8,
     borderWidth: 1,
     padding: 12,
@@ -74,6 +76,7 @@ const styles = StyleSheet.create({
   },
   buttonText: {
     color: "red", // Default text color
+    fontWeight: "400",
   },
   text1: {
     textAlign: "center",
@@ -89,7 +92,9 @@ const styles = StyleSheet.create({
   image: {
     height: 270,
     alignSelf: 'center',
-    marginTop: 60,
+    marginTop: 20,
+    // padding:2,
     width: "100%",
+    objectFit:'cover'
   },
 });

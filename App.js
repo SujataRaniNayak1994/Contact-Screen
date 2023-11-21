@@ -1,28 +1,38 @@
-import { StatusBar } from 'expo-status-bar';
-import { StyleSheet, Text, View } from 'react-native';
-import Splash from './src/screens/Splash';
-import Registration from './src/authentication/Registration';
-import Login from './src/authentication/Login';
-import Welcome from './src/authentication/Welcome';
-import WhereTo from './src/screens/WhereTo';
+import React from "react";
+import 'react-native-gesture-handler';
+import { NavigationContainer } from "@react-navigation/native";
+import { createStackNavigator } from "@react-navigation/stack";
+import Splash from "./src/screens/Splash";
+import Welcome from "./src/authentication/Welcome";
+import MapScreen from "./src/screens/MapScreen";
+import HomeScreen from "./src/screens/HomeScreen";
+import Registration from "./src/authentication/Registration";
+import Login from "./src/authentication/Login";
+
+const Stack = createStackNavigator();
 
 export default function App() {
   return (
-    <View style={styles.container}>
-      {/* <Splash/> */}
-      {/* <Registration/> */}
-      {/* <Login/> */}
-      {/* <Welcome/> */}
-      <WhereTo/>
-    </View>
+    <NavigationContainer>
+      <Stack.Navigator >
+        <Stack.Screen name="Splash" component={Splash} options={{
+          title: '',
+          headerStyle: {
+            backgroundColor: 'red',
+          },
+          headerTintColor: '#fff',
+          headerTitleStyle: {
+            fontWeight: 'bold',
+          },
+        }} />
+        <Stack.Screen name="Welcome" component={Welcome} />
+        <Stack.Screen name="Map" component={MapScreen} />
+        <Stack.Screen name="Home" component={HomeScreen} />
+        <Stack.Screen name="Registration" component={Registration} />
+        <Stack.Screen name="Login" component={Login} />
+      </Stack.Navigator>
+    </NavigationContainer>
+    
   );
 }
 
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    // backgroundColor: '#fff',
-    // alignItems: 'center',
-    // justifyContent: 'center',
-  },
-});

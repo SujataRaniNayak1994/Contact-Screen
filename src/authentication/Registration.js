@@ -44,7 +44,7 @@ const styles = StyleSheet.create({
     height: "100%",
     paddingHorizontal: 5,
     backgroundColor: "#fff",
-    paddingTop: 100,
+    paddingTop: 20,
   },
   check: {
     paddingHorizontal: 20,
@@ -83,7 +83,7 @@ const styles = StyleSheet.create({
   signupText: {
     color: "#fff",
     fontSize: 18,
-    fontWeight: "bold",
+    fontWeight: "400",
   },
   google: {
     height: 60,
@@ -93,7 +93,7 @@ const styles = StyleSheet.create({
     padding: 10,
     borderRadius: 40,
     color: "white",
-    fontWeight:'bold',
+    fontWeight: "800",
     textAlign: "center",
     alignSelf: "center",
     borderColor: "grey",

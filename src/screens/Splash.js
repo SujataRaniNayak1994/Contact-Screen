@@ -1,8 +1,8 @@
 import { StatusBar } from "expo-status-bar";
-import { Image, StyleSheet, Text, View, Button } from "react-native";
+import { Image, StyleSheet, Text, View, TouchableOpacity } from "react-native";
 import React from "react";
 
-const Splash = () => {
+const Splash = ({ navigation }) => {
   return (
     <View style={styles.container}>
       <View style={styles.firstView}>
@@ -13,40 +13,26 @@ const Splash = () => {
 
         <Text style={styles.span1}>ezTruck</Text>
         <Text style={styles.text1}>
-          Effortlessly book relaible mini trucks for all
+          Effortlessly book reliable mini trucks for all
         </Text>
         <Text style={styles.text1}>
           your logistic needs with our user-friendly app
         </Text>
       </View>
-      <View style={styles.btn1}>
-        <Text
-          style={{
-            backgroundColor: "transparent",
-            color:"#fff",
-            textAlign: "center",
-            width: 100,
-            height: 40,
-            padding: 10,
-            // justifyContent:'flex-start'
-          }}
+      <View style={styles.btnContainer}>
+        <TouchableOpacity
+          style={styles.skipButton}
+          onPress={() => navigation.navigate('Map')}
         >
-          Skip
-        </Text>
-        <Text>---</Text>
-        <Text
-          style={{
-            backgroundColor: "#f5f5f5",
-            textAlign: "center",
-            width: 100,
-            height: 40,
-            padding: 10,
-            color:"#fff",
-            // borderRadius:"",
-          }}
+          <Text style={styles.buttonText}>Skip</Text>
+        </TouchableOpacity>
+        <View style={styles.separator}></View>
+        <TouchableOpacity
+          style={styles.nextButton}
+          onPress={() => navigation.navigate('Welcome')}
         >
-          Next
-        </Text>
+          <Text style={styles.buttonText}>Next</Text>
+        </TouchableOpacity>
       </View>
       <StatusBar style="auto" />
     </View>
@@ -59,18 +45,16 @@ const styles = StyleSheet.create({
   container: {
     flex: 1,
     backgroundColor: "red",
-    // alignItems: "center",
-    // justifyContent: "center",
+    paddingBottom:10,
   },
   firstView: {
-    flex: 0.8,
+    flex: 0.6,
     alignItems: "center",
     justifyContent: "center",
   },
   image1: {
-    alignItems: "center",
-    width: 100,
-    height: 100,
+    width: 220,
+    height: 220,
   },
   span1: {
     color: "#fff",
@@ -86,14 +70,45 @@ const styles = StyleSheet.create({
     fontSize: 16,
     color: "#f0f0f0",
     textAlign: "center",
-    // padding:20,
   },
-
-  btn1: {
-    //  flex: 0.1,
-    // backgroundColor: "#fff",
-    // marginTop:100,
+  
+  btnContainer: {
     flexDirection: "row",
     justifyContent: "space-around",
+    alignItems: "center",
+    position: 'absolute',
+    bottom:7, // Position the button container at the bottom
+    left: 0,
+    right: 0,
+    // marginHorizontal:20,
+    backgroundColor: 'transparent', // Set the background color to transparent
+  },
+  skipButton: {
+    backgroundColor: "transparent",
+    borderColor: "#fff",
+    borderWidth: 1,
+    borderRadius: 20,
+    padding: 10,
+    width: 100,
+    // marginBottom: 10, // Add margin to the bottom to create the half inside effect
+  },
+  separator: {
+    width: 20,
+    height: 1,
+    backgroundColor: "#fff",
+  },
+  nextButton: {
+    backgroundColor: "transparent",
+    borderRadius: 20,
+    padding: 10,
+    width: 100,
+    borderColor: "#fff",
+    borderWidth: 1,
+    // marginBottom: 10, // Add margin to the bottom to create the half inside effect
+  },
+  buttonText: {
+    color: "#fff",
+    textAlign: "center",
+    fontWeight: "bold",
   },
 });
