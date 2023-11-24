@@ -9,32 +9,52 @@ import HomeScreen from "./src/screens/HomeScreen";
 import Registration from "./src/authentication/Registration";
 import Login from "./src/authentication/Login";
 import ChooseVehicle from "./src/screens/ChooseVehicle";
+import OtpScreen from "./src/authentication/OtpScreen";
 
 const Stack = createStackNavigator();
 
-export default function App() {
+const App = () => {
   return (
     <NavigationContainer>
-      <Stack.Navigator >
-        <Stack.Screen name="Splash" component={Splash} options={{
-          title: '',
-          headerStyle: {
-            backgroundColor: 'red',
-          },
-          headerTintColor: '#fff',
-          headerTitleStyle: {
-            fontWeight: 'bold',
-          },
-        }} />
-        <Stack.Screen name="Welcome" component={Welcome} />
-        <Stack.Screen name="Map" component={MapScreen} />
-        <Stack.Screen name="Home" component={HomeScreen} />
-        <Stack.Screen name="Registration" component={Registration} />
-        <Stack.Screen name="Login" component={Login} />
-        <Stack.Screen name="ChooseVehicle" component={ChooseVehicle} />
+      <Stack.Navigator initialRouteName="Splash">
+        <Stack.Screen
+          name="Splash"
+          component={Splash}
+          options={{ headerShown: false }}
+        />
+        <Stack.Screen
+          name="Welcome"
+          component={Welcome}
+          options={{ 
+            title: "Back", 
+          // headerMode: 'none' 
+        }}
+        />
+        <Stack.Screen name="Map" component={MapScreen} options={{ title: "Back" }} />
+        <Stack.Screen name="Home" component={HomeScreen} options={{ title: "Back" }} />
+        <Stack.Screen
+          name="Registration"
+          component={Registration}
+          options={{ title: "Back" }}
+        />
+        <Stack.Screen
+          name="Login"
+          component={Login}
+          options={{ title: "Back" }}
+        />
+        <Stack.Screen
+          name="ChooseVehicle"
+          component={ChooseVehicle}
+          options={{ title: "Back" }}
+        />
+        <Stack.Screen
+          name="Otp"
+          component={OtpScreen}
+          options={{ title: "Back" }}
+        />
       </Stack.Navigator>
     </NavigationContainer>
-    
   );
-}
+};
 
+export default App;

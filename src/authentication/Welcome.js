@@ -54,6 +54,7 @@ export default Welcome;
 const styles = StyleSheet.create({
   container: {
     flex: 1,
+    // paddingTop:20,
   },
   button: {
     height: 55,
@@ -61,20 +62,20 @@ const styles = StyleSheet.create({
     borderWidth: 1,
     padding: 12,
     borderRadius: 40,
-    borderColor: "red",
+    borderColor: "#E74C3C",
     backgroundColor: "transparent",
     alignItems: "center",
     justifyContent: "center",
   },
   active: {
-    backgroundColor: "red",
+    backgroundColor: "#E74C3C",
   },
   textWhite: {
     color: "white",
     fontSize:18,
   },
   buttonText: {
-    color: "red", // Default text color
+    color: "#E74C3C", // Default text color
     fontWeight: "400",
   },
   text1: {
@@ -89,11 +90,11 @@ const styles = StyleSheet.create({
     color: "grey",
   },
   image: {
-    height: 270,
+    // height: 270,
     alignSelf: 'center',
-    marginTop: 20,
+    margin:40,
     // padding:2,
-    width: "100%",
+    // width: "100%",
     objectFit:'cover'
   },
 });

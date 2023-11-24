@@ -1,18 +1,12 @@
-import React, { useState } from "react";
-import {
-  Text,
-  StyleSheet,
-  View,
-  TextInput,
-  TouchableOpacity,
-} from "react-native";
+import React from "react";
+import { Text, StyleSheet, View, TextInput, TouchableOpacity,Image } from "react-native";
 import { FontAwesome } from "@expo/vector-icons";
 
 const Login = ({ navigation }) => {
   return (
     <View style={styles.container}>
-      <Text style={styles.text1}>Login With OTP</Text>
-      <View style={styles.view1}>
+      <Text style={styles.title}>Login With OTP</Text>
+      <View style={styles.formContainer}>
         <TextInput
           style={styles.input}
           placeholder="Enter your Phone Number"
@@ -20,115 +14,117 @@ const Login = ({ navigation }) => {
           autoCorrect={false}
         />
         <TouchableOpacity
-          style={styles.button}
-          onPress={() => navigation.navigate("Home")}
+          style={styles.loginButton}
+          onPress={() => navigation.navigate("Otp")}
         >
-          <Text style={styles.buttonText}>LogIn</Text>
+          <Text style={styles.buttonText}>Log In</Text>
         </TouchableOpacity>
         <View style={styles.orContainer}>
           <View style={styles.horizontalLine} />
           <Text style={styles.or}>or</Text>
           <View style={styles.horizontalLine} />
-        </View>
-        <View>
-          <TouchableOpacity>
-            <Text style={styles.google}>Google</Text>
-          </TouchableOpacity>
-        </View>
+        </View> 
+        <TouchableOpacity style={styles.googleButton}>
+  <Image source={require('../../assets/google-icon.png')} style={styles.googleImage} />
+  <Text style={styles.googleText}>Google</Text>
+</TouchableOpacity>
 
-        <View>
-          <Text style={styles.endDesc}>
-            Don't have an account?{" "}
-            <Text style={styles.termsHighlight} onPress={() => navigation.navigate("Registration")}>Sign Up</Text>
+        <Text style={styles.signupText}>
+          Don't have an account?{" "}
+          <Text
+            style={styles.signupLink}
+            onPress={() => navigation.navigate("Registration")}
+          >
+            Sign Up
           </Text>
-        </View>
+        </Text>
       </View>
     </View>
   );
 };
 
-export default Login;
-
 const styles = StyleSheet.create({
   container: {
-    height: "100%",
-    paddingHorizontal: 5,
+    flex: 1,
+    paddingHorizontal: 16,
+    // paddingTop: 60,
     backgroundColor: "#fff",
-    paddingTop: 20,
   },
-  check: {
-    paddingHorizontal: 20,
-    // fontSize: 13,
-    color: "grey",
-    paddingTop: 6,
-  },
-  termsHighlight: {
-    color: "red", // Set the color to red for the highlighted text
-    // fontSize: 12,
-  },
-  text1: {
-    color: "red",
+  title: {
+    color: "#EE272E",
     fontWeight: "600",
-    fontSize: 20,
-    paddingHorizontal: 20,
+    fontSize: 24,
+    marginBottom: 20,
+    paddingHorizontal: 14,
+    
+  },
+  formContainer: {
+    marginBottom: 20,
   },
   input: {
     height: 60,
-    margin: 12,
+    marginVertical: 8,
     borderWidth: 1,
-    padding: 12,
-    borderRadius: 40,
+    paddingHorizontal: 16,
+    borderRadius: 30,
     borderColor: "grey",
     color: "grey",
   },
-  button: {
+  loginButton: {
     height: 55,
-    margin: 8,
-    borderWidth: 1,
-    padding: 12,
-    borderRadius: 40,
-    borderColor: "red",
-    backgroundColor: "red",
+    marginVertical: 8,
+    borderRadius: 30,
+    backgroundColor: "#EE272E",
     alignItems: "center",
     justifyContent: "center",
   },
   buttonText: {
-    color: "#fff", // Default text color
-    fontWeight: "400",
+    color: "#fff",
+    fontWeight: "600",
+    fontSize:18
   },
-  google: {
+  googleButton: {
     height: 60,
     width: 140,
-    margin: 20,
+    margin: 10,
     borderWidth: 1,
-    padding: 20,
     borderRadius: 40,
     color: "black",
     fontWeight: "800",
-    textAlign: "center",
     alignSelf: "center",
     borderColor: "grey",
-    
+    flexDirection: 'row',
+    justifyContent: 'space-evenly',
+    alignItems: 'center', // Align the image and text vertically
+  },
+  googleImage: {
+    width: 30, // Adjust the width as needed
+    height: 30, // Adjust the height as needed
+    marginRight:-10, 
+  },
+  googleText: {
+    color: "black",
+    fontWeight: "600",
+    alignSelf: "center",
+    fontSize:18,
   },
   orContainer: {
     flexDirection: "row",
     alignItems: "center",
     justifyContent: "center",
     marginVertical: 10,
-    paddingHorizontal: 20,
-    color: "grey",
   },
   or: {
     fontSize: 18,
     color: "grey",
-    padding: 10,
+    paddingHorizontal: 10,
   },
   horizontalLine: {
     flex: 1,
     height: 1,
     backgroundColor: "grey",
   },
-  endDesc: {
+  signupText: {
     fontSize: 15,
     margin: 18,
     fontWeight: "bold",
@@ -136,4 +132,9 @@ const styles = StyleSheet.create({
     alignSelf: "center",
     textAlign: "center",
   },
+  signupLink: {
+    color: "#EE272E",
+  },
 });
+
+export default Login;
