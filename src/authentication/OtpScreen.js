@@ -1,16 +1,19 @@
 // OtpScreen.js
-import React, { useState } from 'react';
-import { View, Text, StyleSheet } from 'react-native';
-import OtpInput from './OtpInput';
+import React, { useState } from "react";
+import { View, Text, StyleSheet,TouchableOpacity } from "react-native";
+import OtpInput from "./OtpInput";
 
-const OtpScreen = () => {
-  const [otp, setOtp] = useState(['', '', '', '', '', '']);
+const OtpScreen = ({navigation}) => {
+  const [otp, setOtp] = useState(["", "", "", "", "",]);
   const [focusedInput, setFocusedInput] = useState(0);
+  const [isOtpEntered, setIsOtpEntered] = useState(false);
+
 
   const handleOtpChange = (index, value) => {
     const newOtp = [...otp];
     newOtp[index] = value;
     setOtp(newOtp);
+    setIsOtpEntered(newOtp.some((digit) => digit !== ''));
   };
 
   const handleInputFocus = (index) => {
@@ -19,7 +22,8 @@ const OtpScreen = () => {
 
   return (
     <View style={styles.container}>
-      <Text style={styles.title}>Enter OTP</Text>
+      <Text style={[styles.title, { color: isOtpEntered ? 'black' : '#EE272E' }]}>Phone Verification</Text>
+      <Text style={styles.message}>Enter your OTP code</Text>
       <View style={styles.otpContainer}>
         {otp.map((digit, index) => (
           <OtpInput
@@ -32,7 +36,17 @@ const OtpScreen = () => {
           />
         ))}
       </View>
-      <Text style={styles.message}>Check your email for the OTP.</Text>
+      <Text style={styles.message1}>Didn't receive code ?{" "}
+      <Text style={styles.message2}>Resend again</Text> </Text>
+      <TouchableOpacity
+          style={styles.veryfy}
+          onPress={() => console.log("Sign Up pressed")}
+        >
+          <Text 
+          style={styles.verifyText} 
+          onPress={() => navigation.navigate('Home')}
+          >Verify</Text>
+        </TouchableOpacity>
     </View>
   );
 };
@@ -40,23 +54,49 @@ const OtpScreen = () => {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    justifyContent: 'center',
-    alignItems: 'center',
+    justifyContent: "center",
+    alignItems: "center",
   },
   title: {
-    fontSize: 20,
-    fontWeight: 'bold',
-    marginBottom: 20,
+    fontSize: 24,
+    fontWeight: "bold",
+    marginBottom: 10,
   },
   otpContainer: {
-    flexDirection: 'row',
-    justifyContent: 'center',
+    flexDirection: "row",
+    justifyContent: "center",
     marginTop: 20,
   },
   message: {
-    marginTop: 20,
-    color: 'gray',
+    // marginTop: 20,
+    fontSize:16,
+    color: "gray",
   },
+  message1: {
+    marginTop: 20,
+    color: "gray",
+    fontWeight:'bold'
+  },
+  message2: {
+    marginTop: 20,
+    color: "#EE272E",
+    fontWeight:'bold'
+  },
+  veryfy:{
+    width:'90%',
+    height: 50,
+    marginVertical: 80,
+    borderRadius: 30,
+    backgroundColor: "#EE272E",
+    justifyContent: "center",
+    alignItems: "center",
+    // marginHorizontal:20,
+  },
+  verifyText:{
+    color: "white",
+    fontSize: 18,
+    fontWeight: "400",
+  }
 });
 
 export default OtpScreen;

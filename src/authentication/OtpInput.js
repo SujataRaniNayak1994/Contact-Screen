@@ -27,18 +27,22 @@ const OtpInput = ({ value, onChangeText, index, autoFocus, onFocus, onBlur }) =>
     }
     onChangeText(text);
   };
-
+  const inputStyles = {
+    ...styles.input,
+    borderColor: value !== '' ? 'red' : 'black', // Change border color to red if value is not empty
+    backgroundColor: value !== '' ? 'mistyrose' : 'white', // Change background color to mistyrose if value is not empty
+  };
   return (
     <TextInput
-      ref={inputRef}
-      style={styles.input}
-      value={value}
-      onChangeText={handleTextChange}
-      maxLength={1}
-      keyboardType="numeric"
-      autoFocus={autoFocus}
-      onFocus={handleFocus}
-      onBlur={handleBlur}
+    ref={inputRef}
+    style={inputStyles}
+    value={value}
+    onChangeText={handleTextChange}
+    maxLength={1}
+    keyboardType="numeric"
+    autoFocus={autoFocus}
+    onFocus={handleFocus}
+    onBlur={handleBlur}
     />
   );
 };

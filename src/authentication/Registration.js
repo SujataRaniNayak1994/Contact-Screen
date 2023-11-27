@@ -72,7 +72,7 @@ const Registration = ({ navigation }) => {
           <Text style={styles.googleText}>Google</Text>
         </TouchableOpacity>
         <Text style={styles.signInText}>
-          Already have an account?{" "}
+          Already have an account ?{" "}
           <Text
             style={styles.signInLink}
             onPress={() => navigation.navigate("Login")}

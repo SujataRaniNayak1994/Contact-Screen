@@ -12,18 +12,27 @@ const ChooseVehicle = () => {
       title: "Dala Auto",
       imgDetails: '13.2ftx6.9ftx5.9ft',
       capacity: 'capacity:900kg',
+      weitage:'Small Pick Up',
+      itemDetails:'This vehicle has a large payload capacity of 3.5 tones approximately. capable of carrying construction goods,domestic goods and house/office shifting.',
+      image:require('../../assets/choose2.png')
     },
     {
       id: "3ac68afc-c605-48d3-a4f8-fbd91aa97f63",
       title: "Tata Ace",
       imgDetails: '13.2ftx6.9ftx5.9ft',
       capacity: 'capacity:900kg',
+      weitage:'Medium Pick Up',
+      itemDetails:'This vehicle has a large payload capacity of 3.5 tones approximately. capable of carrying construction goods,domestic goods and house/office shifting.',
+      image:require('../../assets/largeVeichle.png')
     },
     {
-      id: "58694a0f-3da1-471f-bd96-145571e29d72",
+      id: "58694a0f-3da1-471f-bd96-145571e278",
       title: "Pickup",
       imgDetails: '13.2ftx6.9ftx5.9ft',
       capacity: 'capacity:900kg',
+      weitage:'Large Pick Up',
+      itemDetails:'This vehicle has a large payload capacity of 3.5 tones approximately. capable of carrying construction goods,domestic goods and house/office shifting.',
+      image:require('../../assets/choose3.png')
     },
   ];
   const [selectedId, setSelectedId] = useState();

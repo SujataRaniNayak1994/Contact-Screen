@@ -20,7 +20,7 @@ const Splash = ({ navigation }) => {
     <View style={styles.container}>
       {/* Your splash screen image or content */}
       <Image
-        source={require("../../assets/tracking_logo.png")}
+        source={require("../../assets/logo2.png")}
         style={styles.image}
         resizeMode="contain"
       />

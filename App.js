@@ -25,10 +25,7 @@ const App = () => {
         <Stack.Screen
           name="Welcome"
           component={Welcome}
-          options={{ 
-            title: "Back", 
-          // headerMode: 'none' 
-        }}
+          options={{ headerShown: false }}
         />
         <Stack.Screen name="Map" component={MapScreen} options={{ title: "Back" }} />
         <Stack.Screen name="Home" component={HomeScreen} options={{ title: "Back" }} />
