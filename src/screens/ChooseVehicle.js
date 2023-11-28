@@ -12,7 +12,7 @@ const ChooseVehicle = () => {
       title: "Dala Auto",
       imgDetails: '13.2ftx6.9ftx5.9ft',
       capacity: 'capacity:900kg',
-      weitage:'Small Pick Up',
+      weitage:'Small Pickup',
       itemDetails:'This vehicle has a large payload capacity of 3.5 tones approximately. capable of carrying construction goods,domestic goods and house/office shifting.',
       image:require('../../assets/choose2.png')
     },
@@ -21,7 +21,7 @@ const ChooseVehicle = () => {
       title: "Tata Ace",
       imgDetails: '13.2ftx6.9ftx5.9ft',
       capacity: 'capacity:900kg',
-      weitage:'Medium Pick Up',
+      weitage:'Medium Pickup',
       itemDetails:'This vehicle has a large payload capacity of 3.5 tones approximately. capable of carrying construction goods,domestic goods and house/office shifting.',
       image:require('../../assets/largeVeichle.png')
     },
@@ -30,7 +30,7 @@ const ChooseVehicle = () => {
       title: "Pickup",
       imgDetails: '13.2ftx6.9ftx5.9ft',
       capacity: 'capacity:900kg',
-      weitage:'Large Pick Up',
+      weitage:'Large Pickup',
       itemDetails:'This vehicle has a large payload capacity of 3.5 tones approximately. capable of carrying construction goods,domestic goods and house/office shifting.',
       image:require('../../assets/choose3.png')
     },

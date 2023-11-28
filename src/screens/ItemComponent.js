@@ -9,17 +9,13 @@ import {
   Modal,
   TouchableHighlight,
 } from "react-native";
-
 const ItemComponent = ({ item, onPress, backgroundColor, textColor }) => {
-  const [modalVisible, setModalVisible] = useState(false);
-  // Sample data for rates and charges
+  const [modalVisible, setModalVisible] = useState(false);// Sample data for rates and charges
   const baseFare = 10;
   const ratePerKm = 0.5;
   const ratePerMinute = 0.2;
   const waitingCharges = 5;
-
-  // Function to calculate the total amount
-  const calculateTotalAmount = () => {
+  const calculateTotalAmount = () => {  // Function to calculate the total amount
     const distanceCharge = item.distance * ratePerKm;
     const timeCharge = item.time * ratePerMinute;
     const totalAmount = baseFare + distanceCharge + timeCharge + waitingCharges;
@@ -34,7 +30,6 @@ const ItemComponent = ({ item, onPress, backgroundColor, textColor }) => {
           { backgroundColor, borderColor: "#EE272E", borderWidth: 1 },
         ]}
       >
-        {/* Add your image here */}
         <Image
           source={item.image}
           style={[styles.image, { resizeMode: "cover" }]}
@@ -52,9 +47,7 @@ const ItemComponent = ({ item, onPress, backgroundColor, textColor }) => {
 
         <Text style={[styles.price, { color: textColor }]}>$XX.XX</Text>
       </TouchableOpacity>
-
-      {/* Modal */}
-    <Modal
+      <Modal
         animationType="slide"
         transparent={true}
         visible={modalVisible}
@@ -64,33 +57,55 @@ const ItemComponent = ({ item, onPress, backgroundColor, textColor }) => {
       >
         <View style={styles.modalContainer}>
           <View style={styles.modalContent}>
-            <Image source={require('../../assets/largeVeichle.png')}/>
+            <Image source={item.image} />
             <Text style={styles.modalText}>{item.weitage}</Text>
-            <Text style={{ textAlign: 'center', fontSize: 16, color: 'gray' }}>{item.itemDetails}</Text>
-
-            {/* Dashed horizontal line */}
+            <Text style={{ textAlign: "center", fontSize: 16, color: "gray" }}>
+              {item.itemDetails}
+            </Text>
             <View style={styles.dashedLine}></View>
-
-            {/* Display rate details with flexDirection */}
-            <View style={styles.rateDetailsContainer}>
-              <Text style={styles.rateDetailsText}>
-                Base Fare: ${baseFare.toFixed(2)} {"\n"}
-                Rate per Km: ${ratePerKm.toFixed(2)} {"\n"}
-                Rate per Minute: ${ratePerMinute.toFixed(2)} {"\n"}
-                Waiting Charges: ${waitingCharges.toFixed(2)} {"\n"}
-                -------------------------------------- {"\n"}
-                Total Amount: ${calculateTotalAmount()}
-              </Text>
+            <View>
+              <Text>Amount</Text>
+              
+                <Text style={[styles.detailValue, styles.totalAmount]}>
+              ${calculateTotalAmount()}
+            </Text>
+            <Text>Total Estimated fare price including taxes</Text>
+          
             </View>
+            <View style={styles.farelist}>
+          <View style={{ flexDirection: "column", alignItems: "flex-start",justifyContent:'space-around' }}>
+            <Text style={styles.detailLabel}>Base Fare:</Text>
+            <Text style={styles.detailLabel}>Rate per Km:</Text>
+            <Text style={styles.detailLabel}>Rate per Minute:</Text>
+            <Text style={styles.detailLabel}>Waiting Charges:</Text>
+            {/* <Text style={[styles.detailLabel, styles.totalAmount]}>Total Amount:</Text> */}
+          </View>
 
-            {/* Got It button */}
-            <TouchableHighlight
-              onPress={() => {
-                setModalVisible(!modalVisible);
+          <View style={{ flexDirection: "column", alignItems: "flex-start" }}>
+            <Text style={styles.detailValue}>${baseFare.toFixed(2)}</Text>
+            <Text style={styles.detailValue}>${ratePerKm.toFixed(2)}</Text>
+            <Text style={styles.detailValue}>${ratePerMinute.toFixed(2)}</Text>
+            <Text style={styles.detailValue}>${waitingCharges.toFixed(2)}</Text>
+           
+          </View>
+        </View>
+            <View
+              style={{
+                flexDirection: "row",
+                justifyContent: "space-around",
+                marginTop: 30,
+                margin:30
               }}
             >
-              <Text style={styles.closeButton}>Got It</Text>
-            </TouchableHighlight>
+              <Image source={require("../../assets/groupimg.png")}/>
+              <TouchableHighlight
+                onPress={() => {
+                  setModalVisible(!modalVisible);
+                }}
+              >
+                <Text style={styles.closeButton}>Got It</Text>
+              </TouchableHighlight>
+            </View>
           </View>
         </View>
       </Modal>
@@ -136,12 +151,10 @@ const styles = StyleSheet.create({
     justifyContent: "center",
     alignItems: "center",
     backgroundColor: "rgba(0, 0, 0, 0.5)", // semi-transparent background
-    // color:'red'
   },
   modalContent: {
     backgroundColor: "white",
     borderRadius: 15,
-    padding: 20,
     alignItems: "center",
     width: 330, // set the desired width
     height: 550, // set the desired height
@@ -151,21 +164,22 @@ const styles = StyleSheet.create({
     fontWeight: "bold",
     marginBottom: 20,
     color: "#EE272E",
-    alignSelf: "center",
     textAlign: "center",
   },
   closeButton: {
     fontSize: 18,
     color: "#fff",
     textAlign: "center",
-    marginTop: 20,
-    backgroundColor:"#EE272E",
-    width:130,
-    height:40,
-    borderRadius:40,
-    alignSelf:'center',
-    padding:9
+    // marginTop: 20,
+    backgroundColor: "#EE272E",
+    width: 130,
+    height: 40,
+    borderRadius: 40,
+    alignSelf: "center",
+    padding: 9,
+    // marginLeft:10
   },
+
   dashedLine: {
     borderBottomWidth: 1,
     borderBottomColor: "gray",
@@ -173,15 +187,30 @@ const styles = StyleSheet.create({
     marginVertical: 10,
     width: "100%", // Adjust the width as needed
   },
-  rateDetailsContainer: {
-    flexDirection: 'row',
-    justifyContent: 'center',
+  divider: {
+    borderBottomWidth: 1,
+    borderBottomColor: "gray",
+    marginVertical: 10,
+    width: "100%",
   },
-  rateDetailsText: {
-    textAlign: 'center',
-    color: 'gray',
+  farelist: {
+    flexDirection: "row",
+    justifyContent: "space-around",
+  },
+  detailLabel: {
+    fontWeight: "bold",
     fontSize: 16,
+    marginRight:30,
+    marginBottom: 5, // Add spacing between label and value
+  },
+  detailValue: {
+    fontSize: 16,
+    marginLeft:30,
+    marginBottom: 5, 
+  },
+  totalAmount: {
+    color: "#EE272E",
+    fontWeight: "bold",
   },
 });
-
 export default ItemComponent;
