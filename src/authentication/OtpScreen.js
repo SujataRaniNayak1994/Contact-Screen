@@ -44,7 +44,7 @@ const OtpScreen = ({navigation}) => {
         >
           <Text 
           style={styles.verifyText} 
-          onPress={() => navigation.navigate('Home')}
+          onPress={() => navigation.navigate('HomeScreen')}
           >Verify</Text>
         </TouchableOpacity>
     </View>

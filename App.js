@@ -10,6 +10,7 @@ import Registration from "./src/authentication/Registration";
 import Login from "./src/authentication/Login";
 import ChooseVehicle from "./src/screens/ChooseVehicle";
 import OtpScreen from "./src/authentication/OtpScreen";
+import HomeScreen2 from "./src/screens/HomeScreen2";
 
 const Stack = createStackNavigator();
 
@@ -47,6 +48,16 @@ const App = () => {
         <Stack.Screen
           name="Otp"
           component={OtpScreen}
+          options={{ title: "Back" }}
+        />
+      <Stack.Screen
+          name="HomeScreen2"
+          component={HomeScreen2}
+          options={{ title: "Back" }}
+        />
+      <Stack.Screen
+          name="HomeScreen"
+          component={HomeScreen}
           options={{ title: "Back" }}
         />
       </Stack.Navigator>
