@@ -1,4 +1,4 @@
-import React, { useMemo, useState, useEffect } from "react";
+import React, { useMemo, useState,useEffect } from "react";
 import {
   View,
   Text,
@@ -11,11 +11,10 @@ import { ScrollView } from "react-native-gesture-handler";
 import MapView, { Marker, Polyline } from "react-native-maps";
 import BottomSheet from "@gorhom/bottom-sheet";
 import ItemComponent from "./ItemComponent";
-import * as Location from "expo-location";
 // import MapView, { Marker } from "react-native-maps";
 
-const ChooseVehicle = ({navigation}) => {
-  const snapPoints = useMemo(() => ["50%"], []);
+const ChooseVehicle = () => {
+  const snapPoints = useMemo(() => [ "50%"], []);
   const getDirections = async (startLoc, destinationLoc) => {
     try {
       const KEY = "AIzaSyBeKmJ5q2HdnMcCLB0MwX59QenqknBEdlM"; //put your API key here.
@@ -29,7 +28,7 @@ const ChooseVehicle = ({navigation}) => {
       let coords = points.map((point, index) => {
         return {
           latitude: point[0],
-          longitude: point[1],
+          longitude: point[1]
         };
       });
       return coords;
@@ -73,19 +72,19 @@ const ChooseVehicle = ({navigation}) => {
   const [selectedId, setSelectedId] = useState();
 
   const renderItem = ({ item }) => {
-    const isSelected = item.id === selectedId;
-    const backgroundColor = isSelected ? "#EE272E" : "transparent";
-    const textColor = isSelected ? "white" : "#EE272E";
+    const backgroundColor = item.id === selectedId ? "#EE272E" : "transparent";
+    const color = item.id === selectedId ? "white" : "#EE272E";
 
     return (
       <ItemComponent
         item={item}
-        onPress={() => setSelectedId(isSelected ? null : item.id)}
+        onPress={() => setSelectedId(item.id)}
         backgroundColor={backgroundColor}
-        textColor={textColor}
+        textColor={color}
       />
     );
   };
+
 
   const [region, setRegion] = useState({
     latitude: 37.7749, // default latitude (for example, San Francisco)
@@ -103,22 +102,18 @@ const ChooseVehicle = ({navigation}) => {
         PermissionsAndroid.PERMISSIONS.ACCESS_FINE_LOCATION
       );
       if (granted === PermissionsAndroid.RESULTS.GRANTED) {
-        if (navigator.geolocation) {
-          navigator.geolocation.getCurrentPosition(
-            (position) => {
-              const { latitude, longitude } = position.coords;
-              setRegion({
-                ...region,
-                latitude,
-                longitude,
-              });
-            },
-            (error) => console.log(error),
-            { enableHighAccuracy: true, timeout: 20000, maximumAge: 1000 }
-          );
-        } else {
-          console.log("Geolocation is not supported by this device.");
-        }
+        navigator.geolocation.getCurrentPosition(
+          (position) => {
+            const { latitude, longitude } = position.coords;
+            setRegion({
+              ...region,
+              latitude,
+              longitude,
+            });
+          },
+          (error) => console.log(error),
+          { enableHighAccuracy: true, timeout: 20000, maximumAge: 1000 }
+        );
       } else {
         console.log("Location permission denied");
       }
@@ -126,6 +121,7 @@ const ChooseVehicle = ({navigation}) => {
       console.warn(err);
     }
   };
+
   useEffect(() => {
     getUserLocation();
   }, []);
@@ -138,58 +134,53 @@ const ChooseVehicle = ({navigation}) => {
 
   return (
     <View style={styles.container}>
-      <MapView
-        style={styles.map}
-        region={region}
-        showsUserLocation={true}
-        followsUserLocation={true}
-        loadingEnabled={true}
-      >
-        {markers.map((marker, index) => (
-          <Marker
-            key={index}
-            coordinate={{
-              latitude: marker.latitude,
-              longitude: marker.longitude,
-            }}
-            title={marker.title}
-          />
-        ))}
-        <Polyline
+    <MapView
+     style={styles.map}
+     region={region}
+     showsUserLocation={true}
+     followsUserLocation={true}
+   >
+     {markers.map((marker, index) => (
+       <Marker
+         key={index}
+         coordinate={{
+           latitude: marker.latitude,
+           longitude: marker.longitude,
+         }}
+         title={marker.title}
+       />
+     ))}
+     <Polyline
           coordinates={routeCoordinates}
           strokeColor="#EE272E"
           strokeWidth={2}
         />
-      </MapView>
-      <BottomSheet
-        //  index={1}
-        snapPoints={snapPoints}
-      >
-        <View style={styles.bottomSheetContent}>
-          <Text style={styles.text1}>Choose Vehicle</Text>
-          <ScrollView>
-            <FlatList
-              data={DATA}
-              renderItem={renderItem}
-              keyExtractor={(item) => item.id}
-              extraData={selectedId}
-            />
-          </ScrollView>
-
-          <View style={{ flexDirection: "row" }}>
-            <Text>Cash</Text>
-            <Text>PromoCode</Text>
-          </View>
-          <View style={styles.footer}>
-            <TouchableOpacity style={styles.BookNow} >
-              <Text style={styles.BookNowText}
-              onPress={() => navigation.navigate("RequestScreen")}
-              >Book Now</Text>
-            </TouchableOpacity>
-          </View>
-        </View>
-      </BottomSheet>
-    </View>
+   </MapView>
+   <BottomSheet 
+  //  index={1} 
+   snapPoints={snapPoints}>
+     <View style={styles.bottomSheetContent}>
+       <Text style={styles.text1}>Choose Vehicle</Text>
+       <ScrollView>
+         <FlatList
+           data={DATA}
+           renderItem={renderItem}
+           keyExtractor={(item) => item.id}
+           extraData={selectedId}
+         />
+       </ScrollView>
+       <View style={styles.footer}>
+         <View style={{ flexDirection: "row" }}>
+           <Text>Cash</Text>
+           <Text>PromoCode</Text>
+         </View>
+         <TouchableOpacity style={styles.BookNow}>
+           <Text style={styles.BookNowText}>Book Now</Text>
+         </TouchableOpacity>
+       </View>
+     </View>
+   </BottomSheet>
+ </View>
   );
 };
 
@@ -204,6 +195,7 @@ const styles = StyleSheet.create({
   },
   bottomSheetContent: {
     flex: 1,
+    // paddingHorizontal: 16,
   },
   text1: {
     color: "#EE272E",

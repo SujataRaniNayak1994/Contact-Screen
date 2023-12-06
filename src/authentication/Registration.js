@@ -8,7 +8,6 @@ import {
   Image,
 } from "react-native";
 import { Icon } from "react-native-elements";
-// import ToggleButton from "../components/ToggleButton";
 
 const Registration = ({ navigation }) => {
   return (
@@ -35,8 +34,6 @@ const Registration = ({ navigation }) => {
         />
         <TextInput style={styles.input} placeholder="Date Of Birth" />
         <View>
-          {/* <ToggleButton size={0.5} /> */}
-{/* <ToggleButton/> */}
           <Text style={styles.terms}>
             By signing up, you agree to the{" "}
             <Text style={styles.termsHighlight}>Terms of Service</Text> and{" "}
@@ -54,16 +51,6 @@ const Registration = ({ navigation }) => {
           <Text style={styles.or}>or</Text>
           <View style={styles.horizontalLine} />
         </View>
-        {/* <TouchableOpacity style={styles.googleButton}>
-        <Icon
-              type="material-community"
-              name="google"
-              // color={colors.grey1}
-              fontSize={26}
-            />
-            <Image source={require('../../assets/google-icon.png')}/>
-          <Text style={styles.googleText}>Google</Text>
-        </TouchableOpacity> */}
         <TouchableOpacity style={styles.googleButton}>
           <Image
             source={require("../../assets/google-icon.png")}

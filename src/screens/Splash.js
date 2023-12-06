@@ -9,7 +9,7 @@ const Splash = ({ navigation }) => {
 
     // Navigate to the Welcome screen after a certain time (e.g., 2 seconds)
     const timer = setTimeout(() => {
-      navigation.replace("Welcome");
+      navigation.replace("Onboarding");
     }, 2000);
 
     // Clear the timer on component unmount
