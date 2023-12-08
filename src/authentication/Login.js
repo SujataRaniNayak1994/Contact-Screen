@@ -1,8 +1,26 @@
-import React from "react";
-import { Text, StyleSheet, View, TextInput, TouchableOpacity,Image } from "react-native";
+import React, { useState } from "react";
+import {
+  Text,
+  StyleSheet,
+  View,
+  TextInput,
+  TouchableOpacity,
+  Image,
+} from "react-native";
 import { FontAwesome } from "@expo/vector-icons";
 
 const Login = ({ navigation }) => {
+  const [phoneNumber, setPhoneNumber] = useState("");
+
+  const handleLogin = () => {
+    // Add your logic for handling login here
+    // For now, let's just log the phone number to the console
+    console.log("Phone Number:", phoneNumber);
+
+    // Navigate to the OTP screen
+    navigation.navigate("Otp");
+  };
+
   return (
     <View style={styles.container}>
       <Text style={styles.title}>Login With OTP</Text>
@@ -12,22 +30,24 @@ const Login = ({ navigation }) => {
           placeholder="Enter your Phone Number"
           autoCapitalize="none"
           autoCorrect={false}
+          value={phoneNumber}
+          onChangeText={(text) => setPhoneNumber(text)}
         />
-        <TouchableOpacity
-          style={styles.loginButton}
-          onPress={() => navigation.navigate("Otp")}
-        >
+        <TouchableOpacity style={styles.loginButton} onPress={handleLogin}>
           <Text style={styles.buttonText}>Log In</Text>
         </TouchableOpacity>
         <View style={styles.orContainer}>
           <View style={styles.horizontalLine} />
           <Text style={styles.or}>or</Text>
           <View style={styles.horizontalLine} />
-        </View> 
+        </View>
         <TouchableOpacity style={styles.googleButton}>
-  <Image source={require('../../assets/google-icon.png')} style={styles.googleImage} />
-  <Text style={styles.googleText}>Google</Text>
-</TouchableOpacity>
+          <Image
+            source={require("../../assets/google-icon.png")}
+            style={styles.googleImage}
+          />
+          <Text style={styles.googleText}>Google</Text>
+        </TouchableOpacity>
 
         <Text style={styles.signupText}>
           Don't have an account?{" "}
@@ -56,7 +76,6 @@ const styles = StyleSheet.create({
     fontSize: 24,
     marginBottom: 20,
     paddingHorizontal: 14,
-    
   },
   formContainer: {
     marginBottom: 20,
@@ -81,7 +100,7 @@ const styles = StyleSheet.create({
   buttonText: {
     color: "#fff",
     fontWeight: "600",
-    fontSize:18
+    fontSize: 18,
   },
   googleButton: {
     height: 60,
@@ -93,20 +112,20 @@ const styles = StyleSheet.create({
     fontWeight: "800",
     alignSelf: "center",
     borderColor: "grey",
-    flexDirection: 'row',
-    justifyContent: 'space-evenly',
-    alignItems: 'center', // Align the image and text vertically
+    flexDirection: "row",
+    justifyContent: "space-evenly",
+    alignItems: "center", // Align the image and text vertically
   },
   googleImage: {
     width: 30, // Adjust the width as needed
     height: 30, // Adjust the height as needed
-    marginRight:-10, 
+    marginRight: -10,
   },
   googleText: {
     color: "black",
     fontWeight: "600",
     alignSelf: "center",
-    fontSize:18,
+    fontSize: 18,
   },
   orContainer: {
     flexDirection: "row",
