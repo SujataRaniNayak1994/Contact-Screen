@@ -1,28 +1,81 @@
-// OtpScreen.js
-import React, { useState } from "react";
-import { View, Text, StyleSheet,TouchableOpacity } from "react-native";
-import OtpInput from "./OtpInput";
 
-const OtpScreen = ({navigation}) => {
-  const [otp, setOtp] = useState(["", "", "", "", "",]);
+
+
+import React, { useState } from "react";
+import {
+  View,
+  Text,
+  StyleSheet,
+  TouchableOpacity,
+  ScrollView,
+  KeyboardAvoidingView,
+} from "react-native";
+import OtpInput from "./OtpInput";
+import Ionicons from "react-native-vector-icons/Ionicons";
+
+const OtpScreen = ({ navigation }) => {
+  const [otp, setOtp] = useState(["", "", "", "", ""]);
   const [focusedInput, setFocusedInput] = useState(0);
   const [isOtpEntered, setIsOtpEntered] = useState(false);
-
 
   const handleOtpChange = (index, value) => {
     const newOtp = [...otp];
     newOtp[index] = value;
     setOtp(newOtp);
-    setIsOtpEntered(newOtp.some((digit) => digit !== ''));
+    setIsOtpEntered(newOtp.some((digit) => digit !== ""));
   };
 
   const handleInputFocus = (index) => {
     setFocusedInput(index);
   };
 
+  const customKeyboardRows = [
+    ["1\n", "  2\nABC", "  3\nDEF"],
+    ["  4\nGHI", "  5\nJKL", "  6\nMNO"],
+    ["   7\nPQRS", "  8\nTUV", "   9\nWXYZ"],
+    [
+      <TouchableOpacity
+        key="decimal"
+        style={[styles.keyboardButton, styles.transparentBackground]}
+        onPress={() => handleKeyboardKeyPress("dot")}
+      >
+        <Text style={styles.keyboardButtonText}>.</Text>
+      </TouchableOpacity>,
+      "0\n",
+      "backspace",
+    ],
+  ];
+
+  const handleKeyboardKeyPress = (key) => {
+    const newOtp = [...otp];
+    if (key === "backspace" && focusedInput > 0) {
+      newOtp[focusedInput - 1] = "";
+      setOtp(newOtp);
+      setFocusedInput(focusedInput - 1);
+    } else if (focusedInput < newOtp.length && key !== "backspace") {
+      newOtp[focusedInput] = key;
+      setOtp(newOtp);
+      setFocusedInput(focusedInput + 1);
+    }
+  };
+
+  const handleNextPress = () => {
+    // Navigate to the TripHistory screen
+    navigation.navigate("TripHistory");
+  };
+
   return (
-    <View style={styles.container}>
-      <Text style={[styles.title, { color: isOtpEntered ? 'black' : '#EE272E' }]}>Phone Verification</Text>
+    <ScrollView contentContainerStyle={styles.container}>
+      {/* New Next button with arrow */}
+      <TouchableOpacity style={styles.nextButton} onPress={handleNextPress}>
+        <Ionicons name="arrow-forward-outline" size={30} color="white"
+        //  onPress={() => navigation.navigate("TripHistory")}
+         />
+      </TouchableOpacity>
+
+      <Text style={[styles.title, { color: isOtpEntered ? "black" : "red" }]}>
+        Phone Verification
+      </Text>
       <Text style={styles.message}>Enter your OTP code</Text>
       <View style={styles.otpContainer}>
         {otp.map((digit, index) => (
@@ -36,31 +89,75 @@ const OtpScreen = ({navigation}) => {
           />
         ))}
       </View>
-      <Text style={styles.message1}>Didn't receive code ?{" "}
-      <Text style={styles.message2}>Resend again</Text> </Text>
-      <TouchableOpacity
-          style={styles.veryfy}
-          onPress={() => console.log("Sign Up pressed")}
+      <Text style={[styles.text, { color: isOtpEntered ? "black" : "black" }]}>
+        Didn't receive code? <Text style={styles.resendText}>Resend again</Text>
+      </Text>
+
+      <KeyboardAvoidingView behavior="position" style={styles.customVerifyContainer}>
+        <TouchableOpacity
+          style={styles.verify}
+          onPress={() => console.log("Verify button pressed")}
         >
-          <Text 
-          style={styles.verifyText} 
-          onPress={() => navigation.navigate('HomeScreen')}
-          >Verify</Text>
+          <Text
+            style={styles.verifyText}
+            onPress={() => navigation.navigate("TripHistory")}
+          >
+            Verify
+          </Text>
         </TouchableOpacity>
-    </View>
+      </KeyboardAvoidingView>
+
+      <View style={styles.customKeyboardContainer}>
+        <View style={styles.customKeyboard}>
+          {customKeyboardRows.map((row, rowIndex) => (
+            <View key={rowIndex} style={styles.keyboardRow}>
+              {row.map((key) => (
+                <TouchableOpacity
+                  key={key}
+                  style={[
+                    styles.keyboardButton,
+                    {
+                      backgroundColor:
+                        key === "backspace" || key === "dot" ? "transparent" : "white",
+                      width: key === "backspace" || key === "dot" ? 55 : 110,
+                    },
+                  ]}
+                  onPress={() => handleKeyboardKeyPress(key)}
+                >
+                  {key === "backspace" ? (
+                    <Ionicons name="backspace-outline" size={20} color="black" />
+                  ) : (
+                    <Text style={styles.keyboardButtonText}>{key}</Text>
+                  )}
+                </TouchableOpacity>
+              ))}
+            </View>
+          ))}
+        </View>
+      </View>
+    </ScrollView>
   );
 };
 
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    justifyContent: "center",
-    alignItems: "center",
+    backgroundColor: "white",
   },
   title: {
     fontSize: 24,
-    fontWeight: "bold",
     marginBottom: 10,
+    textAlign: "center",
+  },
+  text: {
+    fontSize: 15,
+    marginBottom: 10,
+    textAlign: "center",
+    paddingTop: 10,
+    color: "black",
+  },
+  resendText: {
+    color: "red",
   },
   otpContainer: {
     flexDirection: "row",
@@ -68,35 +165,83 @@ const styles = StyleSheet.create({
     marginTop: 20,
   },
   message: {
-    // marginTop: 20,
-    fontSize:16,
+    fontSize: 18,
     color: "gray",
+    textAlign: "center",
   },
-  message1: {
+  customKeyboardContainer: {
+    position: "absolute",
+    bottom: 0,
+    left: 0,
+    right: 0,
+    backgroundColor: "#CCCCCC",
+    borderRadius: 10,
+  },
+  customKeyboard: {
+    marginTop: 10,
+    width: "100%",
+    paddingHorizontal: 20,
+  },
+  keyboardRow: {
+    flexDirection: "row",
+    justifyContent: "center",
+    marginBottom: 10,
+  },
+  keyboardButton: {
+    padding: 15,
+    borderRadius: 5,
+    alignItems: "center",
+    marginHorizontal: 5,
+    width: 110,
+    height: 55,
+  },
+  keyboardButtonText: {
+    color: "black",
+    fontSize: 15,
+    fontWeight: "bold",
+  },
+  transparentBackground: {
+    backgroundColor: "transparent",
+  },
+  customVerifyContainer: {
+    justifyContent: "center",
+    alignItems: "center",
     marginTop: 20,
-    color: "gray",
-    fontWeight:'bold'
+    marginBottom: 10,
+    paddingTop: 150,
   },
-  message2: {
-    marginTop: 20,
-    color: "#EE272E",
-    fontWeight:'bold'
-  },
-  veryfy:{
-    width:'90%',
+  verify: {
+    width: 320,
     height: 50,
-    marginVertical: 80,
-    borderRadius: 30,
+    borderRadius: 25,
     backgroundColor: "#EE272E",
     justifyContent: "center",
     alignItems: "center",
-    // marginHorizontal:20,
+    marginTop: 10,
+    marginLeft: 5,
   },
-  verifyText:{
+  verifyText: {
     color: "white",
-    fontSize: 18,
+    fontSize: 20,
     fontWeight: "400",
-  }
+  },
+  dotKey: {
+    padding: 15,
+    borderRadius: 5,
+    alignItems: "center",
+    marginHorizontal: 5,
+    width: 55, // Adjust the width as needed
+    height: 55,
+    backgroundColor: "transparent",
+  },
+  nextButton: {
+    position: "absolute",
+    top: 20,
+    left: 20,
+    padding: 10,
+    borderRadius: 5,
+    backgroundColor: "#EE272E",
+  },
 });
 
 export default OtpScreen;

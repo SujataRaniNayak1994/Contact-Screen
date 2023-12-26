@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect } from 'react' ;
 import { StyleSheet, View, PermissionsAndroid } from "react-native";
 import MapView, { Marker, Polyline } from "react-native-maps";
 import SearchBar from "../search/SearchBar";
